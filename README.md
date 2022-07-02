@@ -10,3 +10,5 @@ Notes:
 - if the original files have their own bookmarks, they will not be transferred to the new file!
 - if some or all files are not numbered, then they will be merged in alphabetic order
 - if the final file "result.pdf" already exists, it gets overwritten after the script is run again
+
+test github push
