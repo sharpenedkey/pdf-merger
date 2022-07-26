@@ -32,16 +32,18 @@ def pdf_merger():
 
     # Writes the (temporary) merged pdf file in a folder called
     # "Done", which is created if it doesn't exist
-    if not os.path.isdir(os.getcwd() + "/Done"):
-        os.makedirs(os.getcwd() + "/Done")
-    merger.write("Done/result.pdf")
+    path_done = os.path.join(path, "Done")
+    if not os.path.isdir(path_done):
+        os.makedirs(path_done)
+    path_merged_pdf = os.path.join(path_done, "merged.pdf")
+    merger.write(path_merged_pdf)
 
     # Initializes the file writer and the file reader
     # for the final pdf file
     writer = PdfFileWriter()
-    reader = PdfFileReader("Done/result.pdf")
+    reader = PdfFileReader(path_merged_pdf)
 
-    # Re-creates Bewerbung.pdf using the file writer in order
+    # Re-creates merged.pdf using the file writer in order
     # to then create actually working bookmarks (apparently
     # FileMerger can't do it well enough)
     input_numpages = reader.getNumPages()
@@ -58,13 +60,13 @@ def pdf_merger():
     print()
     writer.setPageMode("/UseOutlines")
 
-    # Writes the newly re-created (now final) Bewerbung.pdf file
-    with open("Done/result.pdf", "wb") as fp:
+    # Writes the newly re-created (now final) merged.pdf file
+    with open(path_merged_pdf, "wb") as fp:
         writer.write(fp)
 
     # Prints the final output
     print("Finished!")
-    print("The final file is located at: " + os.getcwd() + "\\Done\\result.pdf\n")
+    print("The final file is located at: " + path_merged_pdf + "\n")
     input("Press ENTER to exit")
 
 
